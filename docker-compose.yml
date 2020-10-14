@@ -1,0 +1,30 @@
+version: '3.2'
+
+services:
+  server.port=${SPRING_MOCK_PORT:8090}
+  mock.port=${MOCK_PORT:8092}
+  management.server.port=${SPRING_MOCK_MANAGEMENT_PORT:8091}
+  mock-server:
+    image: #{contener id}
+    container_name: mock-server
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      SPRING_MOCK_PORT: ${SPRING_MOCK_PORT}
+      MOCK_PORT: ${MOCK_PORT}
+      SPRING_MOCK_MANAGEMENT_PORT: ${SPRING_MOCK_MANAGEMENT_PORT}
+    healthcheck:
+      test: curl -sSf --max-time 3 http://localhost:8091/ops/health || exit 1
+      interval: 20s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./wiremock:/wiremock:rw
+    ports:
+      - 8090:8090
+      - 8092:8092
+      - 8091:8091
+
+
+networks:
+  bridge:
+    driver: bridge
