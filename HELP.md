@@ -3,6 +3,8 @@
 
 **Mock  server embedded functionality:** 
 
+`A GET request to the root admin URL e.g http://localhost:8080/__admin will return all currently registered stub mappings`
+
 __admin
 
 __admin/shutdown

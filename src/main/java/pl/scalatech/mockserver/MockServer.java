@@ -35,6 +35,7 @@ class MockServer {
     public void restart() {
         wireMockServer.stop();
         wireMockServer.start();
+        wireMockServer.resetAll();
         log.info("<<MockServer restart>>");
     }
 
