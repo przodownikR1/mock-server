@@ -16,7 +16,7 @@ class MockServer {
         this.setting = setting;
         wireMockServer = new WireMockServer(
                 WireMockConfiguration.options()
-                                     .port(setting.port)//ordersBaseUri.getPort("")
+                                     .port(setting.port)
                                      .fileSource(new SingleRootFileSource("./wiremock")));
         wireMockServer.start();
         log.info("<<MockServer start >>");
@@ -35,6 +35,7 @@ class MockServer {
     public void restart() {
         wireMockServer.stop();
         wireMockServer.start();
+        log.info("<<MockServer restart>>");
     }
 
 
